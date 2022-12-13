@@ -19,7 +19,7 @@ function CheckEntry(): JSX.Element {
   };
 
 	return (
-		<section className='py-5 text-center'>
+		<section className='py-3 text-center'>
 			<div className="row py-lg-5">
 				<div className="col-lg-8 col-md-8 mx-auto">
 					<h1 className="fw-light">Vehicle checker</h1>
