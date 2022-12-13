@@ -1,26 +1,25 @@
 import React from 'react';
+import { useRoutes } from 'react-router-dom';
+import Routes from 'routes/routes';
 import logo from './logo.svg';
 import './App.scss';
+import Header from 'components/header/header.component';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          This is vme app
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const routes = useRoutes(Routes);
+	return (
+		<div className="app">
+			{/* <img src={logo} className="App-logo" alt="logo" /> */}
+			<header>
+				<Header />
+			</header>
+			<div className='top-banner'></div>
+			<div className='container-fluid'>
+				{routes}
+			</div>
+			<footer></footer>
+		</div>
+	);
 }
 
 export default App;
