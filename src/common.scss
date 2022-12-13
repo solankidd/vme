@@ -24,6 +24,11 @@
 	background-position: center center;
 }
 
+.navbar-logo{
+	width: 30px;
+	margin-right: 10px;
+}
+
 @include media-breakpoint-up(sm) {
 	.top-banner{
 		height: 300px;
