@@ -29,21 +29,40 @@
 	margin-right: 10px;
 }
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-between(xs, sm) {
 	.top-banner{
 		height: 300px;
 	}
 }
 
-@include media-breakpoint-up(xxl) {
+@include media-breakpoint-between(sm, md) {
 	.top-banner{
-		height: 515px;
+		height: 300px;
 	}
 }
 
-@include media-breakpoint-up(lg) {
+@include media-breakpoint-between(md, lg) {
+	.top-banner{
+		height: 300px;
+	}
+}
+
+@include media-breakpoint-between(lg, xl) {
 	.top-banner{
 		height: 350px;
+	}
+}
+
+@include media-breakpoint-between(xl, xxl) {
+	.top-banner{
+		height: 400px;
+	}
+}
+
+@include media-breakpoint-up(xxl) {
+	.top-banner{
+		height: 500px;
+		background-position: center 45%;
 	}
 }
 
