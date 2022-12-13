@@ -7,6 +7,10 @@ const Routes: RouteObject[] = [
 	{
 		path: '/',
 		element: <CheckEntry />
+	},
+	{
+		path: '/vme',
+		element: <CheckEntry />
 	}
 ];
 
