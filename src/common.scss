@@ -17,11 +17,11 @@
 }
 
 .top-banner{
-	background-image: url(../public//vme.jpg);
+	background-image: url(../public//vme3.png);
 	height: 180px;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: center 21%;
+	background-position: center center;
 }
 
 @include media-breakpoint-up(sm) {
