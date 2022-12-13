@@ -1,16 +1,20 @@
 {
   "files": {
-    "main.css": "/vme/static/css/main.eeb4ae37.css",
-    "main.js": "/vme/static/js/main.c2abc5f0.js",
+    "main.css": "/vme/static/css/main.18055c80.css",
+    "main.js": "/vme/static/js/main.325a65a0.js",
     "static/js/787.0b7f402b.chunk.js": "/vme/static/js/787.0b7f402b.chunk.js",
-    "static/media/logo.svg": "/vme/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/bootstrap-icons.woff?": "/vme/static/media/bootstrap-icons.6959d0d983ee318f8880.woff",
+    "static/media/bootstrap-icons.woff2?": "/vme/static/media/bootstrap-icons.b2e5aab643c6f0fd2da6.woff2",
+    "static/media/vme.jpg": "/vme/static/media/vme.6a8f6f4ebcf482564d98.jpg",
     "index.html": "/vme/index.html",
-    "main.eeb4ae37.css.map": "/vme/static/css/main.eeb4ae37.css.map",
-    "main.c2abc5f0.js.map": "/vme/static/js/main.c2abc5f0.js.map",
+    "static/media/invalid.svg": "/vme/static/media/invalid.6376436babdee8fe41f6.svg",
+    "static/media/valid.svg": "/vme/static/media/valid.ac62869b3064c3b85221.svg",
+    "main.18055c80.css.map": "/vme/static/css/main.18055c80.css.map",
+    "main.325a65a0.js.map": "/vme/static/js/main.325a65a0.js.map",
     "787.0b7f402b.chunk.js.map": "/vme/static/js/787.0b7f402b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eeb4ae37.css",
-    "static/js/main.c2abc5f0.js"
+    "static/css/main.18055c80.css",
+    "static/js/main.325a65a0.js"
   ]
 }
