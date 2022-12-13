@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/vme/static/css/main.87b863aa.css",
+    "main.css": "/vme/static/css/main.8fdcc3d0.css",
     "main.js": "/vme/static/js/main.00ca3718.js",
     "static/js/787.0b7f402b.chunk.js": "/vme/static/js/787.0b7f402b.chunk.js",
     "static/media/bootstrap-icons.woff?": "/vme/static/media/bootstrap-icons.6959d0d983ee318f8880.woff",
@@ -8,13 +8,13 @@
     "static/media/vme.jpg": "/vme/static/media/vme.6a8f6f4ebcf482564d98.jpg",
     "index.html": "/vme/index.html",
     "static/media/invalid.svg": "/vme/static/media/invalid.6376436babdee8fe41f6.svg",
-    "static/media/valid.svg": "/vme/static/media/valid.ac62869b3064c3b85221.svg",
-    "main.87b863aa.css.map": "/vme/static/css/main.87b863aa.css.map",
+    "static/media/valid.svg": "/vme/static/media/valid.ecaa1564a9e53eff0a76.svg",
+    "main.8fdcc3d0.css.map": "/vme/static/css/main.8fdcc3d0.css.map",
     "main.00ca3718.js.map": "/vme/static/js/main.00ca3718.js.map",
     "787.0b7f402b.chunk.js.map": "/vme/static/js/787.0b7f402b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.87b863aa.css",
+    "static/css/main.8fdcc3d0.css",
     "static/js/main.00ca3718.js"
   ]
 }
