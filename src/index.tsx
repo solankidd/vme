@@ -17,7 +17,7 @@ root.render(
 		</BrowserRouter>
   </React.StrictMode>
 );
-const onUpdateFound = (reg) => {
+const onUpdateFound = (reg:any) => {
 	let confirmDialog = confirm('Update found, you want to reload?');
 	if (confirmDialog == true) {
 		reg.waiting.postMessage({type: 'SKIP_WAITING'});
