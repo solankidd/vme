@@ -64,6 +64,9 @@ function CheckEntry(): JSX.Element {
 	}
 
 	const handleChange = (event: any) => {
+		if(!event.target.value || event.target.value.length < 4) {
+			setValidityCls('');
+		}
 		setVehicleNo(event.target.value);
 	};
 
@@ -80,7 +83,7 @@ function CheckEntry(): JSX.Element {
 							<div className="valid-feedback">
 								Looks good!
 							</div>
-							<button disabled={!vehicleNo} type="submit" className="btn btn-primary mt-3 me-3" onClick={(e) => check(e)}>
+							<button disabled={!vehicleNo || vehicleNo.length < 4} type="submit" className="btn btn-primary mt-3 me-3" onClick={(e) => check(e)}>
 								{isLoading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
 								&nbsp;Check
 							</button>
