@@ -21,7 +21,9 @@ const onUpdateFound = (reg:any) => {
 	let confirmDialog = confirm('Update found, you want to reload?');
 	if (confirmDialog == true) {
 		reg.waiting.postMessage({type: 'SKIP_WAITING'});
-		window.location.reload();
+		setTimeout(()=>{
+			window.location.reload();
+		},1000);
 	}
 };
 // If you want your app to work offline and load faster, you can change
