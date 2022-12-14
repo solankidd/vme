@@ -18,7 +18,10 @@ root.render(
   </React.StrictMode>
 );
 const onUpdateFound = () => {
-	alert('Update found, you want to reload?')
+	let confirmDialog = confirm('Update found, you want to reload?');
+	if (confirmDialog == true) {
+		window.location.reload();
+	}
 };
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
