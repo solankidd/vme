@@ -6,7 +6,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import "bootstrap/dist/js/bootstrap.min.js";
-
+/* eslint-disable no-restricted-globals */
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
