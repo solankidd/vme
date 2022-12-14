@@ -74,7 +74,7 @@ function CheckEntry(): JSX.Element {
 		<section className="py-3">
 			<div className="row py-lg-5 py-3 text-center">
 				<div className="col-lg-8 col-md-8 mx-auto">
-					<h1 className="fw-light">Vehicle checker</h1>
+					<h1 className="fw-light">Vehicle checker v1</h1>
 					<p className="lead text-muted">Enter vehicle number to check if vehicle belongs to society</p>
 					<form className='row needs-validation wasvalidated' noValidate autoComplete="on">
 						<div className="col-md-12">
