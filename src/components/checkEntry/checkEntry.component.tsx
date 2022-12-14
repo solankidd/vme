@@ -18,6 +18,7 @@ function CheckEntry(): JSX.Element {
 	const [validityCls, setValidityCls] = useState('');
 	const [vehicleNo, setVehicleNo] = useState('');
 	const [vehicleDetail, setVehicleDetail] = useState<VehicleDetail>();
+	const [noVehicleFound, setNoVehicleFound] = useState(false);
 
 	useEffect(() => {
 
@@ -34,7 +35,9 @@ function CheckEntry(): JSX.Element {
 				if (result) {
 					setVehicleDetail(result);
 					setValidityCls('valid');
+					setNoVehicleFound(false);
 				} else {
+					setNoVehicleFound(true);
 					setValidityCls('invalid');
 				}
 				setIsLoading(false);
@@ -44,6 +47,7 @@ function CheckEntry(): JSX.Element {
 	function check(event: any) {
 		setValidityCls('');
 		event.preventDefault();
+		setVehicleDetail(undefined);
 		getData();
 	}
 
@@ -59,7 +63,7 @@ function CheckEntry(): JSX.Element {
 
 	return (
 		<section className="py-3">
-			<div className="row py-lg-5 text-center">
+			<div className="row py-lg-5 py-3 text-center">
 				<div className="col-lg-8 col-md-8 mx-auto">
 					<h1 className="fw-light">Vehicle checker</h1>
 					<p className="lead text-muted">Enter vehicle number to check if vehicle belongs to society or not</p>
@@ -95,6 +99,9 @@ function CheckEntry(): JSX.Element {
 					</div>
 				</div>
 			</div>}
+			{noVehicleFound &&
+				<div className="alert alert-danger" role="alert">No vehicle found!</div>
+			}
 		</section>
 	);
 }
