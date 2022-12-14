@@ -8,16 +8,26 @@ import Header from 'components/header/header.component';
 function App() {
 	const routes = useRoutes(Routes);
 	return (
-		<div className="app">
+		<div className="app app-main-layout">
 			{/* <img src={logo} className="App-logo" alt="logo" /> */}
 			<header>
 				<Header />
 			</header>
-			<div className='top-banner'></div>
-			<div className='container-fluid'>
-				{routes}
+			<div className='app-content'>
+				<div className='top-banner'></div>
+				<div className='container-fluid'>
+					{routes}
+				</div>
 			</div>
-			<footer></footer>
+			<footer>
+			<div className='container-fluid'>
+				<span>version: 4</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>App: VM Empire</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>Author: Dhaval Solanki</span>
+			</div>
+			</footer>
 		</div>
 	);
 }
