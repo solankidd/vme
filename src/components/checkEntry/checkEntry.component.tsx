@@ -30,8 +30,12 @@ function CheckEntry(): JSX.Element {
 			.then((response) => {
 				setData(response.data);
 				let result = response.data.find((ele: any) => {
-					let dataValue = ele.vehicle.toString().toLowerCase().substr(ele.vehicle.length - 4);
-					let enteredVal = vehicleNo.toLowerCase().substr(vehicleNo.length - 4);
+					let dataValue = ele.vehicle.toString().toLowerCase();
+					let enteredVal = vehicleNo.toLowerCase();
+					if(vehicleNo.length === 4){
+						dataValue = dataValue.substr(ele.vehicle.length - 4);
+						enteredVal = enteredVal.substr(vehicleNo.length - 4);
+					}
 					return enteredVal == dataValue;
 				});
 				if (result) {
@@ -95,6 +99,7 @@ function CheckEntry(): JSX.Element {
 								{/* <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
 							</div>
 							<ul className="list-group list-group-flush">
+								<li className="list-group-item">Vehicle No: <b>{vehicleDetail.vehicle.toUpperCase()}</b></li>
 								<li className="list-group-item">Vehicle Type: <b>{vehicleDetail.vehicletype}</b></li>
 								<li className="list-group-item">Block: <b>{vehicleDetail.block}-{vehicleDetail.flatno}</b></li>
 							</ul>
