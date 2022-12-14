@@ -30,7 +30,9 @@ function CheckEntry(): JSX.Element {
 			.then((response) => {
 				setData(response.data);
 				let result = response.data.find((ele: any) => {
-					return ele.vehicle.toString().toLowerCase() == vehicleNo.toLowerCase();
+					let dataValue = ele.vehicle.toString().toLowerCase().substr(ele.vehicle.length - 4);
+					let enteredVal = vehicleNo.toLowerCase().substr(vehicleNo.length - 4);
+					return enteredVal == dataValue;
 				});
 				if (result) {
 					setVehicleDetail(result);
