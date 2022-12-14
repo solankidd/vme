@@ -21,11 +21,12 @@ function App() {
 			</div>
 			<footer>
 			<div className='container-fluid'>
-				<span>version: 4</span>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>V4</span>
+				&nbsp;&nbsp;&nbsp;
 				<span>App: VM Empire</span>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;
 				<span>Author: Dhaval Solanki</span>
+				&nbsp;&nbsp;&nbsp;
 			</div>
 			</footer>
 		</div>
