@@ -1,11 +1,17 @@
 import React from 'react';
 function Header(): JSX.Element {
+	const refresh = () => { 
+		window.location.reload();	
+	};
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div className="container-fluid">
 				<a className="navbar-brand d-flex justify-content-center align-items-center" href="#">
 					<img src={process.env.PUBLIC_URL + '/logo.svg'} alt="Logo" className="navbar-logo" />
-					<span>VM Empire</span>
+					<span className='me-2' onClick={(e) => refresh()}>VM Empire</span>
+					<i className="bi bi-arrow-clockwise"></i>
+					{/* <button type="button" className="btn btn-secondary mt-3" onClick={(e) => refresh()}>
+					</button> */}
 				</a>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
