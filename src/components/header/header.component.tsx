@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 function Header(): JSX.Element {
 	const [isRefreshing, setIsRefreshing] = useState(false);
 	const refresh = () => { 
@@ -23,10 +24,10 @@ function Header(): JSX.Element {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav">
 						<li className="nav-item">
-							<a className="nav-link active" aria-current="page" href="#">Home</a>
+							<Link className='nav-link' to="/vme">Home</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">Announcements</a>
+							<Link className='nav-link' to="/announcement">Announcements</Link>
 						</li>
 					</ul>
 				</div>
