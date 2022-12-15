@@ -12,7 +12,6 @@ interface VehicleDetail {
 
 function CheckEntry(): JSX.Element {
 	const API = `https://script.google.com/macros/s/${API_KEY}/exec`;
-	const API_Count = `https://script.google.com/macros/s/${API_KEY}/exec?onlyCount=true`;
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [validityCls, setValidityCls] = useState('');
@@ -20,13 +19,18 @@ function CheckEntry(): JSX.Element {
 	const [vehicleDetail, setVehicleDetail] = useState<VehicleDetail>();
 	const [noVehicleFound, setNoVehicleFound] = useState(false);
 
-	useEffect(() => {
-
-	}, [data]);
+	useEffect(() => {}, []);
 
 	function getData() {
 		setIsLoading(true);
-		axios.get(API)
+
+		axios.get(API, {
+			params: {
+				onlyCount: false,
+				sheetId: '1gc7xRh3GdF3galmA8nbZqlpz7SIb9OSFpiNuG_99TrE',
+				sheetName: 'vehicle'
+			}
+		})
 			.then((response) => {
 				setData(response.data);
 				let result = response.data.find((ele: any) => {
@@ -74,7 +78,7 @@ function CheckEntry(): JSX.Element {
 		<section className="py-3">
 			<div className="row py-lg-5 py-3 text-center">
 				<div className="col-lg-8 col-md-8 mx-auto">
-					<h1 className="fw-light">Vehicle checker v4</h1>
+					<h1 className="fw-light">Vehicle checker</h1>
 					<p className="lead text-muted">Enter vehicle number to check if vehicle belongs to society</p>
 					<form className='row needs-validation wasvalidated' noValidate autoComplete="on">
 						<div className="col-md-12">
