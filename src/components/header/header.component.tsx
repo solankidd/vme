@@ -1,7 +1,13 @@
+import UseLocalStorage from 'hooks/localStorage.hook';
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { STORAGE_KEY_SECRET } from 'shared/constant';
+
 function Header(): JSX.Element {
 	const [isRefreshing, setIsRefreshing] = useState(false);
+	const {clearStore, getStore} = UseLocalStorage(STORAGE_KEY_SECRET);
+	const navigate = useNavigate();
+	
 	const refresh = () => { 
 		setIsRefreshing(true);
 		setTimeout(()=>{
@@ -9,6 +15,16 @@ function Header(): JSX.Element {
 			setIsRefreshing(false);
 		}, 2000)
 	};
+
+	const logout = ()=> {
+		clearStore();
+		navigate('/login');
+	};
+
+	const login = ()=> {
+		navigate('/login');
+	};
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div className="container-fluid">
@@ -29,6 +45,12 @@ function Header(): JSX.Element {
 						<li className="nav-item">
 							<Link className='nav-link' to="/announcement">Announcements</Link>
 						</li>
+						{getStore(STORAGE_KEY_SECRET) && <li className="nav-item">
+							<a className='nav-link' onClick={()=>{ logout() }}>Logout</a>
+						</li>}
+						{!getStore(STORAGE_KEY_SECRET) && <li className="nav-item">
+							<a className='nav-link' onClick={()=>{ login() }}>Login</a>
+						</li>}
 					</ul>
 				</div>
 			</div>

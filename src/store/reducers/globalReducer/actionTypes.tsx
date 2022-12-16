@@ -1,0 +1,1 @@
+export const UPDATE_COMMON_DATA = 'UPDATE_COMMON_DATA';

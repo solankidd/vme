@@ -37,11 +37,21 @@ footer {
 }
 
 .top-banner{
-	background-image: url(../public//vme3.png);
+	background-image: url(../public/vme4.png);
 	height: 180px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
+}
+
+.top-banner-text {
+	background-image: url(../public/mountain-sunset.jpeg);
+	padding: 20px 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	color: white;
+	font-size: 50px;
 }
 
 .navbar-logo{

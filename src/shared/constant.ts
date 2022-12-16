@@ -1,2 +1,2 @@
 export const API_KEY = 'AKfycby4dMb-neDEtVYwRt-nSQoj1SAlgoFMVeew1YugCzWbprchUTjpnCDz36g9LaxhXXNOVg';
-// export const GLOBAL_SETTING_API_KEY = 'AKfycbx9bCvuoL9ITaTdUICdRXvi-O4aEuTYuClAgGIvpk4EYQ0V0H6SDEeqyOOpagLTK5fC';
+export const STORAGE_KEY_SECRET = 'secret';

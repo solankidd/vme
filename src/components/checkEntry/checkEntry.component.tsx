@@ -1,16 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 import { API_KEY } from 'shared/constant';
 
 interface VehicleDetail {
 	name: string;
 	block: string;
-	flatno: string;
-	vehicletype: string;
+	flatNo: string;
+	vehicleType: string;
 	vehicle: string;
 }
 
 function CheckEntry(): JSX.Element {
+	const state:any = useSelector((state) => state);
+	
 	const API = `https://script.google.com/macros/s/${API_KEY}/exec`;
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -42,8 +45,16 @@ function CheckEntry(): JSX.Element {
 					}
 					return enteredVal == dataValue;
 				});
+				
 				if (result) {
-					setVehicleDetail(result);
+					const vDetail = {
+						name: result.name,
+						block: result.block,
+						flatNo: result.flatno,
+						vehicleType: result.vehicletype,
+						vehicle: result.vehicle
+					}
+					setVehicleDetail(vDetail);
 					setValidityCls('valid');
 					setNoVehicleFound(false);
 				} else {
@@ -107,8 +118,8 @@ function CheckEntry(): JSX.Element {
 							</div>
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">Vehicle No: <b>{vehicleDetail.vehicle.toUpperCase()}</b></li>
-								<li className="list-group-item">Vehicle Type: <b>{vehicleDetail.vehicletype}</b></li>
-								<li className="list-group-item">Block: <b>{vehicleDetail.block}-{vehicleDetail.flatno}</b></li>
+								<li className="list-group-item">Vehicle Type: <b>{vehicleDetail.vehicleType}</b></li>
+								<li className="list-group-item">Block: <b>{vehicleDetail.block}-{vehicleDetail.flatNo}</b></li>
 							</ul>
 					</div>
 				</div>

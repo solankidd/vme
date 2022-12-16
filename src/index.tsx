@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from "react-redux";
+import Store from './store';
+
 import './index.scss';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -12,9 +15,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-		<BrowserRouter>
-    	<App />
-		</BrowserRouter>
+		<Provider store={Store}>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</Provider>
   </React.StrictMode>
 );
 const onUpdateFound = (reg:any) => {
