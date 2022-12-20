@@ -144,7 +144,7 @@ function CheckEntry(): JSX.Element {
 								<li className="list-group-item">Block: <b>{vehicleDetail.block}-{vehicleDetail.flatNo}</b></li>
 								<li className="list-group-item">
 									Mobile number: 
-									<b>&nbsp;<a href="tel:{vehicleDetail.phone}">{vehicleDetail.phone}</a></b>
+									<b>&nbsp;<a href={`tel:${vehicleDetail.phone}`}>{vehicleDetail.phone}</a></b>
 								</li>
 							</ul>
 					</div>
