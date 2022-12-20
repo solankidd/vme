@@ -9,7 +9,7 @@ import { API_KEY } from 'shared/constant';
 import Routes from 'routes/routes';
 import './App.scss';
 import Header from 'components/header/header.component';
-import UseLocalStorage from 'hooks/localStorage.hook';
+import { useLocalStorage } from 'usehooks-ts'
 import { STORAGE_KEY_SECRET, STORAGE_KEYS } from 'shared/constant';
 
 interface VehicleDetail {
@@ -24,8 +24,8 @@ function App() {
 	const routes = useRoutes(Routes);
 	const API = `https://script.google.com/macros/s/${API_KEY}/exec`;
 	const [globalData, setGlobalData] = useState<VehicleDetail>();
-	const [secret, setSecret] = UseLocalStorage(STORAGE_KEY_SECRET, "");
-	const [cache, setCache] = UseLocalStorage(STORAGE_KEYS.CACHE, "");
+	const [secret, setSecret] = useLocalStorage(STORAGE_KEY_SECRET, "");
+	const [cache, setCache] = useLocalStorage(STORAGE_KEYS.CACHE, "");
 	const navigate = useNavigate();
 
 	useEffect(() => {
