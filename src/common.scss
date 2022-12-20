@@ -59,6 +59,10 @@ footer {
 	margin-right: 10px;
 }
 
+.c-pointer {
+	cursor: pointer;
+}
+
 @include media-breakpoint-between(sm, md) {
 	.top-banner{
 		height: 300px;

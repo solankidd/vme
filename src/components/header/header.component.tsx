@@ -8,21 +8,21 @@ function Header(): JSX.Element {
 	const [isRefreshing, setIsRefreshing] = useState(false);
 	const navigate = useNavigate();
 	const [secret, setSecret] = useLocalStorage(STORAGE_KEY_SECRET, '');
-	
-	const refresh = () => { 
+
+	const refresh = () => {
 		setIsRefreshing(true);
-		setTimeout(()=>{
-			window.location.reload();	
+		setTimeout(() => {
+			window.location.reload();
 			setIsRefreshing(false);
 		}, 2000)
 	};
 
-	const logout = ()=> {
+	const logout = () => {
 		setSecret('');
 		navigate('/login');
 	};
 
-	const login = ()=> {
+	const login = () => {
 		navigate('/login');
 	};
 
@@ -32,7 +32,7 @@ function Header(): JSX.Element {
 				<a className="navbar-brand d-flex justify-content-center align-items-center" href="#">
 					<img src={process.env.PUBLIC_URL + '/logo.svg'} alt="Logo" className="navbar-logo" />
 					<div className='me-2'>VM Empire</div>
-					{ !isRefreshing && <i className="bi bi-arrow-clockwise" onClick={(e) => refresh()}></i>}
+					{!isRefreshing && <i className="bi bi-arrow-clockwise" onClick={(e) => refresh()}></i>}
 					{isRefreshing && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
 				</a>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,14 +53,31 @@ function Header(): JSX.Element {
 							<a className='nav-link' onClick={()=>{ login() }}>Login</a>
 						</li>} */}
 					</ul>
-					<form className="d-flex">
-					{!!secret && <button onClick={()=>{ logout() }} className="btn btn-outline-secondary" type="button">
+					<ul className="navbar-nav d-flex">
+						{!!secret && <li className="nav-item c-pointer">
+							<a className='nav-link' onClick={()=>{ logout() }}>Logout &nbsp;<i className="bi bi-shield-lock"></i></a>
+						</li>}
+						{!secret && <li className="nav-item c-pointer">
+							<a className='nav-link' onClick={()=>{ login() }}>Login  &nbsp;<i className="bi bi-shield-lock"></i></a>
+						</li>}
+						{/* <li className="nav-item">
+							{!!secret && <button onClick={() => { logout() }} className="btn btn-outline-secondary" type="button">
+								<i className="bi bi-shield-lock"></i>
+							</button>}
+							{!secret && <button onClick={() => { login() }} className="btn btn-outline-secondary" type="button">
+								<i className="bi bi-shield-lock"></i>
+							</button>}
+						</li> */}
+					</ul>
+					{/* <form className="d-flex">
+						<i className="bi bi-shield-lock"></i>
+						{!!secret && <button onClick={() => { logout() }} className="btn btn-outline-secondary" type="button">
 							<i className="bi bi-shield-lock"></i>
 						</button>}
-					{!secret && <button onClick={() => { login() }} className="btn btn-outline-secondary" type="button">
+						{!secret && <button onClick={() => { login() }} className="btn btn-outline-secondary" type="button">
 							<i className="bi bi-shield-lock"></i>
 						</button>}
-					</form>
+					</form> */}
 				</div>
 			</div>
 		</nav>
