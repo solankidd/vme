@@ -42,7 +42,7 @@ const Login = () => {
 
 	return (
 		<div className='row justify-content-center'>
-			<div className='col-4'>
+			<div className='col-12 col-md-4 col-sm-6'>
 				<form className='mt-3' noValidate>
 					<div className="mb-3">
 						<label htmlFor="exampleInputPassword1" className="form-label">Password</label>
