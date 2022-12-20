@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { useLocalStorage } from 'usehooks-ts'
 import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { API_KEY } from 'shared/constant';
+import { STORAGE_KEYS } from 'shared/constant';
 
 interface VehicleDetail {
 	name: string;
@@ -9,6 +11,8 @@ interface VehicleDetail {
 	flatNo: string;
 	vehicleType: string;
 	vehicle: string;
+	version: string;
+	phone: string;
 }
 
 function CheckEntry(): JSX.Element {
@@ -21,48 +25,61 @@ function CheckEntry(): JSX.Element {
 	const [vehicleNo, setVehicleNo] = useState('');
 	const [vehicleDetail, setVehicleDetail] = useState<VehicleDetail>();
 	const [noVehicleFound, setNoVehicleFound] = useState(false);
+	const [vehicles, setVehicles] = useLocalStorage(STORAGE_KEYS.VEHICLE_DATA, '');
+	const [cache, setCache] = useLocalStorage(STORAGE_KEYS.CACHE, '');
 
 	useEffect(() => {}, []);
 
+	function processVehicleData(data:any) {
+		setData(data);
+		setVehicles(data);
+		let result = data.find((ele: any) => {
+			let dataValue = ele.vehicle.toString().toLowerCase();
+			let enteredVal = vehicleNo.toLowerCase();
+			if(vehicleNo.length === 4){
+				dataValue = dataValue.substr(ele.vehicle.length - 4);
+				enteredVal = enteredVal.substr(vehicleNo.length - 4);
+			}
+			return enteredVal == dataValue;
+		});
+
+		if (result) {
+			const vDetail = {
+				name: result.name,
+				block: result.block,
+				flatNo: result.flatno,
+				vehicleType: result.vehicletype,
+				vehicle: result.vehicle,
+				version: result.version,
+				phone: result.phone
+			}
+			setVehicleDetail(vDetail);
+			setValidityCls('valid');
+			setNoVehicleFound(false);
+		} else {
+			setNoVehicleFound(true);
+			setValidityCls('invalid');
+		}
+		setIsLoading(false);
+	}
 	function getData() {
 		setIsLoading(true);
 
-		axios.get(API, {
-			params: {
-				onlyCount: false,
-				sheetId: '1gc7xRh3GdF3galmA8nbZqlpz7SIb9OSFpiNuG_99TrE',
-				sheetName: 'vehicle'
-			}
-		})
-			.then((response) => {
-				setData(response.data);
-				let result = response.data.find((ele: any) => {
-					let dataValue = ele.vehicle.toString().toLowerCase();
-					let enteredVal = vehicleNo.toLowerCase();
-					if(vehicleNo.length === 4){
-						dataValue = dataValue.substr(ele.vehicle.length - 4);
-						enteredVal = enteredVal.substr(vehicleNo.length - 4);
-					}
-					return enteredVal == dataValue;
-				});
-				
-				if (result) {
-					const vDetail = {
-						name: result.name,
-						block: result.block,
-						flatNo: result.flatno,
-						vehicleType: result.vehicletype,
-						vehicle: result.vehicle
-					}
-					setVehicleDetail(vDetail);
-					setValidityCls('valid');
-					setNoVehicleFound(false);
-				} else {
-					setNoVehicleFound(true);
-					setValidityCls('invalid');
+		if(vehicles.length && (vehicles[0] as any).version == cache) {
+			processVehicleData(vehicles)
+		} else {
+			axios.get(API, {
+				params: {
+					onlyCount: false,
+					sheetId: '1gc7xRh3GdF3galmA8nbZqlpz7SIb9OSFpiNuG_99TrE',
+					sheetName: 'vehicle'
 				}
-				setIsLoading(false);
-			});
+			})
+				.then((response) => {
+					processVehicleData(response.data)
+				});
+		}
+
 	}
 
 	function check(event: any) {
@@ -89,7 +106,7 @@ function CheckEntry(): JSX.Element {
 		<section className="py-3">
 			<div className="row py-lg-5 py-3 text-center">
 				<div className="col-lg-8 col-md-8 mx-auto">
-					<h1 className="fw-light">Vehicle checker</h1>
+					<h1 className="fw-light">Vehicle checker {state.version}</h1>
 					<p className="lead text-muted">Enter vehicle number to check if vehicle belongs to society</p>
 					<form className='row needs-validation wasvalidated' noValidate autoComplete="on">
 						<div className="col-md-12">
@@ -118,8 +135,17 @@ function CheckEntry(): JSX.Element {
 							</div>
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">Vehicle No: <b>{vehicleDetail.vehicle.toUpperCase()}</b></li>
-								<li className="list-group-item">Vehicle Type: <b>{vehicleDetail.vehicleType}</b></li>
+								<li className="list-group-item">
+									Vehicle Type: <b>{vehicleDetail.vehicleType}</b>
+									&nbsp;&nbsp;
+									{vehicleDetail.vehicleType.substring(0,1) == '4' && <b><i className="bi bi-car-front-fill"></i></b>}
+									{vehicleDetail.vehicleType.substring(0,1) == '2' && <b><i className="bi bi-scooter"></i></b>}
+								</li>
 								<li className="list-group-item">Block: <b>{vehicleDetail.block}-{vehicleDetail.flatNo}</b></li>
+								<li className="list-group-item">
+									Mobile number: 
+									<b>&nbsp;<a href="tel:{vehicleDetail.phone}">{vehicleDetail.phone}</a></b>
+								</li>
 							</ul>
 					</div>
 				</div>

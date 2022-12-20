@@ -1,12 +1,13 @@
-import UseLocalStorage from 'hooks/localStorage.hook';
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { STORAGE_KEY_SECRET } from 'shared/constant';
 
+import { useLocalStorage } from 'usehooks-ts'
+
 function Header(): JSX.Element {
 	const [isRefreshing, setIsRefreshing] = useState(false);
-	const {clearStore, getStore} = UseLocalStorage(STORAGE_KEY_SECRET);
 	const navigate = useNavigate();
+	const [secret, setSecret] = useLocalStorage(STORAGE_KEY_SECRET, '');
 	
 	const refresh = () => { 
 		setIsRefreshing(true);
@@ -17,7 +18,7 @@ function Header(): JSX.Element {
 	};
 
 	const logout = ()=> {
-		clearStore();
+		setSecret('');
 		navigate('/login');
 	};
 
@@ -38,20 +39,28 @@ function Header(): JSX.Element {
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">
-					<ul className="navbar-nav">
+					<ul className="navbar-nav me-auto">
 						<li className="nav-item">
 							<Link className='nav-link' to="/vme">Home</Link>
 						</li>
 						<li className="nav-item">
 							<Link className='nav-link' to="/announcement">Announcements</Link>
 						</li>
-						{getStore(STORAGE_KEY_SECRET) && <li className="nav-item">
+						{/* {!!secret && <li className="nav-item">
 							<a className='nav-link' onClick={()=>{ logout() }}>Logout</a>
 						</li>}
-						{!getStore(STORAGE_KEY_SECRET) && <li className="nav-item">
+						{!secret && <li className="nav-item">
 							<a className='nav-link' onClick={()=>{ login() }}>Login</a>
-						</li>}
+						</li>} */}
 					</ul>
+					<form className="d-flex">
+					{!!secret && <button onClick={()=>{ logout() }} className="btn btn-outline-secondary" type="button">
+							<i className="bi bi-shield-lock"></i>
+						</button>}
+					{!secret && <button onClick={() => { login() }} className="btn btn-outline-secondary" type="button">
+							<i className="bi bi-shield-lock"></i>
+						</button>}
+					</form>
 				</div>
 			</div>
 		</nav>

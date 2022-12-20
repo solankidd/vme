@@ -1,71 +1,82 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 
-export interface StorageTypes {
-  value: any;
-  setStore: (val: any) => void;
-  getStore: (val: any) => string;
-  clearStore: () => void;
-  clearAllStore: () => void;
+function UseLocalStorage(key:any,defaultValue:any) {
+	const [state, setState] = useState(() => {
+		let value;
+		try {
+			value = JSON.parse(window.localStorage.getItem(key) || JSON.stringify(defaultValue))
+		} catch (e) {
+			value = defaultValue;
+		}
+		return value;
+	});
+
+	useEffect(
+		() => {
+			setState(state)
+			window.localStorage.setItem(key, JSON.stringify(state));
+		},
+		[state]
+	);
+
+	return [state, setState]
 }
 
-function UseLocalStorage(key: string, initialValue = null): StorageTypes {
-  const prefix = 'ProofPilot-';
-  const [storedValue, setStorageValue] = useState(() => {
+/* function getSavedValue(key:any,value:any) {
+	const val = window.localStorage.getItem(key) as string;
+	const saveValue = JSON.parse(val);
+	if(saveValue) return saveValue;
+	return value;
+}
+
+function UseLocalStorage(key:any, value:any) {
+	const [updatedValue, setUpdatedValue] = useState(()=>{
+		return getSavedValue(key,value)
+	})
+
+	useEffect(()=>{
+		window.localStorage.setItem(key, JSON.stringify(updatedValue))
+	}, [updatedValue]);
+
+	return [updatedValue, setUpdatedValue];
+} */
+
+/* function UseLocalStorage(key:any, initialValue:any) {
+  // State to store our value
+  // Pass initial state function to useState so logic is only executed once
+  const [storedValue, setStoredValue] = useState(() => {
+    if (typeof window === "undefined") {
+      return initialValue;
+    }
     try {
-      const item = window.localStorage.getItem(prefix + key);
+      // Get from local storage by key
+      const item = window.localStorage.getItem(key);
+      // Parse stored json or if none return initialValue
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-			console.log(error);
+      // If error also return initialValue
+      console.log(error);
       return initialValue;
     }
   });
-  
-  const setValue = (value: any): void => {
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue = (value:any) => {
     try {
+      // Allow value to be a function so we have same API as useState
       const valueToStore = value instanceof Function ? value(storedValue) : value;
-       const strValue = JSON.stringify(valueToStore);
-
-      setStorageValue(strValue);
-      window.localStorage.setItem(prefix + key, strValue);
+      // Save state
+      setStoredValue(valueToStore);
+      // Save to local storage
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      }
     } catch (error) {
-			console.log(error);
-		}
+      // A more advanced implementation would handle the error case
+      console.log(error);
+    }
   };
-
-	const getValue = (key: any): any => {
-    try {
-			const val = window.localStorage.getItem('ProofPilot-' + key) || '';
-			return JSON.parse(val)
-    } catch (error) {
-			console.log(error);
-		}
-  };
-
-  const clearValue = (): void => {
-    try {
-      setStorageValue(null);
-      window.localStorage.removeItem(prefix + key);
-    } catch (error) {
-			console.log(error);
-		}
-  };
-
-  const clearAllValue = (): void => {
-    try {
-      setStorageValue(null);
-      window.localStorage.clear();
-    } catch (error) {
-			console.log(error);
-		}
-  };
-
-  return {
-      value: storedValue,
-      setStore: setValue,
-      getStore: getValue,
-      clearStore: clearValue,
-      clearAllStore: clearAllValue
-  };
-}
+  return [storedValue, setValue];
+} */
 
 export default UseLocalStorage;

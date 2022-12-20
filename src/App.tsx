@@ -10,7 +10,7 @@ import Routes from 'routes/routes';
 import './App.scss';
 import Header from 'components/header/header.component';
 import UseLocalStorage from 'hooks/localStorage.hook';
-import { STORAGE_KEY_SECRET } from 'shared/constant';
+import { STORAGE_KEY_SECRET, STORAGE_KEYS } from 'shared/constant';
 
 interface VehicleDetail {
 	version: string;
@@ -24,7 +24,8 @@ function App() {
 	const routes = useRoutes(Routes);
 	const API = `https://script.google.com/macros/s/${API_KEY}/exec`;
 	const [globalData, setGlobalData] = useState<VehicleDetail>();
-	const {clearStore, getStore} = UseLocalStorage(STORAGE_KEY_SECRET);
+	const [secret, setSecret] = UseLocalStorage(STORAGE_KEY_SECRET, "");
+	const [cache, setCache] = UseLocalStorage(STORAGE_KEYS.CACHE, "");
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -40,8 +41,8 @@ function App() {
 			}
 		})
 			.then((response) => {
-				if(getStore(STORAGE_KEY_SECRET) !== response.data[0].secret){
-					clearStore();
+				if (secret !== response.data[0].secret) {
+					setSecret('')
 					navigate('/login');
 				}
 				const gData = {
@@ -51,6 +52,7 @@ function App() {
 				};
 				setGlobalData(gData);
 				dispatch(updateGlobalData(gData));
+				setCache(gData.cacheVersion);
 			});
 	}
 
@@ -61,22 +63,45 @@ function App() {
 				<Header />
 			</header>
 			<div className='app-content'>
-				<div className='top-banner-text text-center'>
+				{/* <div className='top-banner-text text-center'>
 					<h1><b>VM EMPIRE</b></h1>
+				</div> */}
+				<div className='top-banner-text'>
+					<div className="flag d-flex flex-column">
+						<div className="orange"></div>
+						<div className="white d-flex justify-content-center align-items-center">
+						<img src="/vme/logo.svg" alt="Logo" className="circle " />
+							{/* <div className="circle">
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+								<span className="bar"></span>
+							</div> */}
+						</div>
+						<div className="green"></div>
+					</div>
 				</div>
 				<div className='container-fluid'>
 					{routes}
 				</div>
 			</div>
 			<footer>
-			<div className='container-fluid'>
-				<span>Installed V1</span>
-				&nbsp;&nbsp;&nbsp;
-				<span>App: VM Empire {globalData?.version}</span>
-				&nbsp;&nbsp;&nbsp;
-				<span>Author: Dhaval Solanki</span>
-				&nbsp;&nbsp;&nbsp;
-			</div>
+				<div className='container-fluid'>
+					<span>Installed V1</span>
+					&nbsp;&nbsp;&nbsp;
+					<span>App: VM Empire {globalData?.version}</span>
+					&nbsp;&nbsp;&nbsp;
+					<span>Author: Dhaval Solanki</span>
+					&nbsp;&nbsp;&nbsp;
+				</div>
 			</footer>
 		</div>
 	);

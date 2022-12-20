@@ -1,14 +1,15 @@
 import React, { MouseEvent, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import UseLocalStorage from 'hooks/localStorage.hook';
-import { STORAGE_KEY_SECRET } from 'shared/constant';
+import { useLocalStorage } from 'usehooks-ts';
 
+import { STORAGE_KEY_SECRET } from 'shared/constant';
 import { API_KEY } from 'shared/constant';
+
 const Login = () => {
 	const [password, setPassword] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-	const { setStore } = UseLocalStorage(STORAGE_KEY_SECRET);
+	const [secret, setSecret] = useLocalStorage(STORAGE_KEY_SECRET, '');
 	const navigate = useNavigate();
 
 	const getGlobalSetting = () => {
@@ -22,7 +23,7 @@ const Login = () => {
 			}
 		}).then((response) => {
 			if (password === response.data[0].secret) {
-				setStore(password);
+				setSecret(password);
 				setIsLoading(false);
 				navigate('/vme');
 			}
