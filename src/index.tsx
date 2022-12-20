@@ -25,7 +25,7 @@ root.render(
 const onUpdateFound = (reg:any) => {
 	let confirmDialog = confirm('Update found, you want to reload?');
 	if (confirmDialog == true) {
-		alert('index onUpdateFound SKIP_WAITING');
+		console.log('index onUpdateFound SKIP_WAITING');
 		reg.waiting.postMessage({type: 'SKIP_WAITING'});
 		setTimeout(()=>{
 			window.location.reload();
@@ -34,8 +34,7 @@ const onUpdateFound = (reg:any) => {
 };
 
 const onSuccessDone = (reg:any)=> {
-	alert('index onSuccessDone');
-	window.location.reload();
+	console.log('index onSuccessDone');
 }
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
