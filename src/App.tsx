@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { useNavigate, useRoutes } from 'react-router-dom';
+import { useNavigate, useRoutes, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { updateGlobalData } from "./store/reducers/globalReducer/actions";
 
@@ -19,6 +19,7 @@ interface VehicleDetail {
 }
 
 function App() {
+	const [searchParams] = useSearchParams();
 	const dispatch = useDispatch();
 
 	const routes = useRoutes(Routes);
@@ -27,8 +28,11 @@ function App() {
 	const [secret, setSecret] = useLocalStorage(STORAGE_KEY_SECRET, "");
 	const [cache, setCache] = useLocalStorage(STORAGE_KEYS.CACHE, "");
 	const navigate = useNavigate();
-
+	console.log(searchParams.get('path'));
 	useEffect(() => {
+		if (searchParams.get('path') == 'announcement') {
+			navigate(searchParams.get('path') as string);
+		}
 		getGlobalSetting();
 	}, []);
 
@@ -70,21 +74,7 @@ function App() {
 					<div className="flag d-flex flex-column">
 						<div className="orange"></div>
 						<div className="white d-flex justify-content-center align-items-center">
-						<img src="/vme/logo.svg" alt="Logo" className="circle " />
-							{/* <div className="circle">
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-								<span className="bar"></span>
-							</div> */}
+							<img src="/vme/logo.svg" alt="Logo" className="circle " />
 						</div>
 						<div className="green"></div>
 					</div>
@@ -95,7 +85,7 @@ function App() {
 			</div>
 			<footer>
 				<div className='container-fluid'>
-					<span>Installed V1</span>
+					<span>Installed V2</span>
 					&nbsp;&nbsp;&nbsp;
 					<span>App: VM Empire {globalData?.version}</span>
 					&nbsp;&nbsp;&nbsp;
